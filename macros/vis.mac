@@ -1,0 +1,49 @@
+#----
+/vis/open OGL
+
+
+/vis/drawVolume
+#macro x visual mode
+
+/vis/viewer/set/viewpointThetaPhi -90 0 deg
+/vis/viewer/zoom 0.8
+
+
+# for drawing the tracks
+/vis/scene/add/trajectories
+
+/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
+
+/vis/modeling/trajectories/create/drawByCharge
+/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 1
+# (if too many tracks cause core dump => /tracking/storeTrajectory 0)
+# for drawing the hits, uncomment next line
+/vis/scene/add/hits
+# (if you prefer refreshing each event, comment out next line)
+/vis/scene/endOfEventAction accumulate
+
+
+/vis/scene/add/trajectories smooth
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/default/setDrawStepPts true
+/vis/viewer/set/autoRefresh true
+/control/execute ./macros/icons.mac
+
+
+
+/run/verbose 1
+/run/dumpRegion 0
+
+/event/verbose 1
+/tracking/verbose 0
+
+/control/verbose 0
+
+
+#/gun/particle gamma 		#gia settata nel file PrimaryGenerator
+#/gun/energy 1. MeV 
+#/run/beamOn 5
+
+
+
